@@ -1,4 +1,4 @@
-class Card:
+class Card():
 
     def __init__( self , suit , point_val , string_val ):
         

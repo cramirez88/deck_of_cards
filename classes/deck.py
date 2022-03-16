@@ -1,4 +1,5 @@
-from . import card
+from classes.card import *
+import random
 
 class Deck:
 
@@ -20,9 +21,30 @@ class Deck:
                     str_val = "King"
                 else:
                     str_val = str(i)
-                self.cards.append( card.Card( s , i , str_val ) )
+                self.cards.append(Card( s , i , str_val ) )
 
     def show_cards(self):
         for card in self.cards:
             card.card_info()
+
+    def shuffle(self, num=1):
+        length = len(self.cards)
+        for _ in range(num):
+            # This is the fisher yates shuffle algorithm
+            for i in range(length-1, 0, -1):
+                randi = random.randint(0, i)
+                if i == randi:
+                    continue
+                self.cards[i], self.cards[randi] = self.cards[randi], self.cards[i]
+            # You can also use the build in shuffle method
+            # random.shuffle(self.cards)
+
+    # Return the top card
+    def deal(self):
+        return self.cards.pop()
+
+deck = Deck()
+deck.shuffle()
+deck.show_cards()
+
 
